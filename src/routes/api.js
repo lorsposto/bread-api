@@ -1,6 +1,6 @@
 import express from 'express';
 
-var router = express.Router();
+const router = express.Router();
 
 // middleware
 router.use((req, res, next) => {

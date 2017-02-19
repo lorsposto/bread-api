@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import Formula from '../models/formula';
 
-var createFormula = (req, res) => {
-    var formula = new Formula();
+const createFormula = (req, res) => {
+    const formula = new Formula();
     formula.name = req.body.name;
     _.each(req.body.ingredients, (value, key) => {
         formula.ingredients.push(value);
@@ -15,7 +15,7 @@ var createFormula = (req, res) => {
     });
 };
 
-var listFormulas = (req, res) => {
+const listFormulas = (req, res) => {
     Formula.find((err, formulas) => {
         if (err)
             res.send(err);
@@ -23,7 +23,7 @@ var listFormulas = (req, res) => {
     });
 };
 
-var getFormula = (req, res) => {
+const getFormula = (req, res) => {
     Formula.findById(req.params.formula_id, (err, formula) => {
         if (err)
             res.send(err);
@@ -31,7 +31,7 @@ var getFormula = (req, res) => {
     });
 };
 
-var updateFormula = (req, res) => {
+const updateFormula = (req, res) => {
     Formula.findById(req.params.formula_id, (err, formula) => {
         if (err)
             res.send(err);
@@ -44,7 +44,7 @@ var updateFormula = (req, res) => {
     });
 };
 
-var deleteFormula = (req, res) => {
+const deleteFormula = (req, res) => {
     Formula.remove({_id: req.params.formula_id}, (err, formula) => {
         if (err)
             res.send(err);

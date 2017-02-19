@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
 
-var FormulaSchema = new Schema({
+const FormulaSchema = new Schema({
     name: String,
     value: Number, // total weight
     ingredients: [

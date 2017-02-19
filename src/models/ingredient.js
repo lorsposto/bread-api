@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var IngredientSchema = new Schema({
+const IngredientSchema = new Schema({
     name: String,
     type: {
         type: String,

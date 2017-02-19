@@ -1,7 +1,7 @@
 import express from 'express';
 import * as controllers from '../controllers/formulas'
 
-var router = express.Router({ mergeParams: true });
+const router = express.Router({ mergeParams: true });
 
 router.route('/')
     .post(controllers.createFormula)
