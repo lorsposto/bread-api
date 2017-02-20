@@ -23,15 +23,30 @@ const listIngredients = (req, res) => {
 };
 
 const listIngredientsByType = (req, res) => {
+    const host = req.get('host'),
+        protocol = req.get('protocol'),
+        baseUrl = req.baseUrl,
+        origUrl = req.originalUrl,
+        fullUrl = `${host}${origUrl}`;
+    console.log('host', req)
     Ingredient.find(req.params.type ? {type: _.toUpper(req.params.type)} : {}, (err, ingredients) => {
         if (err)
             res.send(err);
-        res.json(ingredients);
+        let response = _.map(ingredients, (value, index) => {
+            return _.extend(
+                _.merge({}, value.toJSON()),
+                { _links: { _self: `${fullUrl}/${value._id}` } }
+            );
+        });
+        res.json(_.extend(response, {
+            _links: {
+                _self: fullUrl,
+            }
+        }));
     });
 };
 
 const listIngredientTypes = (req, res) => {
-    console.log('REQ', req.originalUrl)
     const host = req.get('host'),
         baseUrl = req.baseUrl,
         origUrl = req.originalUrl,
@@ -54,10 +69,19 @@ const listIngredientTypes = (req, res) => {
 
 
 const getIngredient = (req, res) => {
+    const host = req.get('host'),
+        baseUrl = req.baseUrl,
+        origUrl = req.originalUrl,
+        fullUrl = `${host}${origUrl}`;
     Ingredient.findById(req.params.ingredient_id, (err, ingredient) => {
         if (err)
             res.send(err);
-        res.json(ingredient);
+        const response = _.extend(_.merge({}, ingredient.toJSON()), {
+            _links: {
+                _self: fullUrl,
+            }
+        });
+        res.json(response);
     });
 };
 

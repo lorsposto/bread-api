@@ -14,6 +14,11 @@ router.route('/types')
 router.route('/types/:type')
     .get(controllers.listIngredientsByType);
 
+router.route('/types/:type/:ingredient_id')
+    .get(controllers.getIngredient)
+    .put(controllers.updateIngredient)
+    .delete(controllers.deleteIngredient);
+
 router.route('/:ingredient_id')
     .get(controllers.getIngredient)
     .put(controllers.updateIngredient)
